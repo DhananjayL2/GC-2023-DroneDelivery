@@ -1,0 +1,63 @@
+
+<%- include("partials/header"); -%>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn-1t94CNsBvNFWVVLUKHdW4o10Dh3C6g"></script>
+    <script>
+      function initMap() {
+        // Initialize map
+        const map = new google.maps.Map(document.getElementById('map'), {
+          center: { lat: 37.7749, lng: -122.4194 },
+          zoom: 12
+        });
+
+        // Initialize marker
+        const marker = new google.maps.Marker({
+          position: { lat: 37.7749, lng: -122.4194 },
+          map: map,
+          draggable: true
+        });
+
+        // Update marker position on drag
+        google.maps.event.addListener(marker, 'dragend', function(event) {
+          document.getElementById('latitude').value = event.latLng.lat();
+ document.getElementById('longitude').value = event.latLng.lng();
+        });
+      }
+    </script>
+  </head>
+  <body onload="initMap()">
+
+        <h3>Welcome <%-user.displayName-%> Please choose your delivery location from map</h3>
+
+         <div id="map" style="height: 400px"></div>
+         <form id = "f" method="post" action="/delivery-request">
+           <div class="form-group">
+             <label for="customerName">Customer Name:</label>
+             <input class="form-control" type="text" id="customerName" name="customerName" required><br>
+           </div>
+  <br>
+  <div class="form-group">
+    <label for="phoneNumber">Phone Number:</label>
+    <input class="form-control" type="text" id="phoneNumber" name="phoneNumber" required><br>
+  </div>
+  <div class="form-group">
+
+    <label for="deliveryDate">Delivery Date:</label>
+    <input  class="form-control" type="date" id="deliveryDate" name="deliveryDate" required><br>
+  </div>
+
+
+
+  <input type="hidden" id="latitude" name="latitude">
+  <input type="hidden" id="longitude" name="longitude">
+  <button class="btn btn-primary" type="submit">Get Delivery</button>
+</form>
+
+
+<div class="text-center  px-md-5">
+<a href="/package-history"> <button class="text-center md-10 btn btn-outline-primary">Delievery History</button></a>
+
+
+</div>
+
+  </body>
+  <%- include("partials/footer"); -%>

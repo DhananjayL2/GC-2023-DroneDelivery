@@ -1,0 +1,26 @@
+<%- include("partials/header"); -%>
+<h1>Package History</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Customer Name</th>
+      <th>Delivery Date</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% deliveryRequests.forEach(function(deliveryRequest) { %>
+      <tr>
+        <td><%= deliveryRequest.customerName %></td>
+        <td><%= deliveryRequest.deliveryDate %></td>
+        <td><%= deliveryRequest.status %></td>
+        <% if (deliveryRequest.driverName && deliveryRequest.driverPhoneNumber) { %>
+
+        <% } else { %>
+
+        <% } %>
+      </tr>
+    <% }); %>
+  </tbody>
+</table>
+<%- include("partials/footer"); -%>
